@@ -16,6 +16,7 @@
 		4A70BE9A2549088900DE5703 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A70BE992549088900DE5703 /* Trip.swift */; };
 		4AB7EC9B254B6C40005C751B /* TripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7EC9A254B6C40005C751B /* TripTableViewCell.swift */; };
 		4AB7EC9E254B7497005C751B /* TripDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB7EC9D254B7497005C751B /* TripDetailViewController.swift */; };
+		4AE48148254C8B5C0017BF2D /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE48147254C8B5C0017BF2D /* AddTripViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		4A70BE992549088900DE5703 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		4AB7EC9A254B6C40005C751B /* TripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTableViewCell.swift; sourceTree = "<group>"; };
 		4AB7EC9D254B7497005C751B /* TripDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripDetailViewController.swift; sourceTree = "<group>"; };
+		4AE48147254C8B5C0017BF2D /* AddTripViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,13 +67,14 @@
 				4A70BE83254907D600DE5703 /* AppDelegate.swift */,
 				4A70BE85254907D600DE5703 /* SceneDelegate.swift */,
 				4A70BE87254907D600DE5703 /* TripTableViewController.swift */,
+				4AB7EC9D254B7497005C751B /* TripDetailViewController.swift */,
+				4AE48147254C8B5C0017BF2D /* AddTripViewController.swift */,
 				4A70BE89254907D600DE5703 /* Main.storyboard */,
 				4A70BE8C254907D800DE5703 /* Assets.xcassets */,
 				4A70BE8E254907D800DE5703 /* LaunchScreen.storyboard */,
 				4A70BE91254907D800DE5703 /* Info.plist */,
 				4A70BE992549088900DE5703 /* Trip.swift */,
 				4AB7EC9A254B6C40005C751B /* TripTableViewCell.swift */,
-				4AB7EC9D254B7497005C751B /* TripDetailViewController.swift */,
 			);
 			path = PA6;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AE48148254C8B5C0017BF2D /* AddTripViewController.swift in Sources */,
 				4AB7EC9E254B7497005C751B /* TripDetailViewController.swift in Sources */,
 				4A70BE9A2549088900DE5703 /* Trip.swift in Sources */,
 				4A70BE88254907D600DE5703 /* TripTableViewController.swift in Sources */,

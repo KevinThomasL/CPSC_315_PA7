@@ -76,9 +76,12 @@ class TripTableViewController: UIViewController, UITableViewDataSource, UITableV
                             // get the currently selected index path
                             if let indexPath = tableView.indexPathForSelectedRow {
                                 trips[indexPath.row] = trip
-                                // force update the table view
-                                tableView.reloadData()
-                        }
+                            }
+                            else {
+                                trips.append(trip)
+                            }
+                            // force update the table view
+                            tableView.reloadData()
                     }
                 }
             }

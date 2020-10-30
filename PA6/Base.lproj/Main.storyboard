@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Trip Table View Controller-->
+        <!--Trips-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="TripTableViewController" customModule="PA6" customModuleProvider="target" sceneMemberID="viewController">
@@ -66,7 +66,13 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8uN-Lq-PES" secondAttribute="bottom" id="oR0-Hw-pT2"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="XYG-LA-WWi"/>
+                    <navigationItem key="navigationItem" title="Trips" id="XYG-LA-WWi">
+                        <barButtonItem key="rightBarButtonItem" title="Add" image="plus" catalog="system" id="vzA-Ao-xLg">
+                            <connections>
+                                <segue destination="ojf-ZZ-pMI" kind="show" identifier="AddSegue" id="5pt-fy-Ash"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="8uN-Lq-PES" id="azs-rp-FvZ"/>
                     </connections>
@@ -75,7 +81,7 @@
             </objects>
             <point key="canvasLocation" x="192.80000000000001" y="158.77061469265368"/>
         </scene>
-        <!--Trip Detail View Controller-->
+        <!--Trip Details-->
         <scene sceneID="kDO-pN-lkW">
             <objects>
                 <viewController id="ag9-HG-zv3" customClass="TripDetailViewController" customModule="PA6" customModuleProvider="target" sceneMemberID="viewController">
@@ -147,7 +153,7 @@
                             <constraint firstItem="GlG-ZT-Vuh" firstAttribute="top" secondItem="mrb-Ck-Swl" secondAttribute="top" constant="16" id="DXr-bj-eyd"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Za3-iA-gZV"/>
+                    <navigationItem key="navigationItem" title="Trip Details" id="Za3-iA-gZV"/>
                     <connections>
                         <outlet property="destinationLabel" destination="wKY-Nh-rLE" id="dr8-gR-Mcr"/>
                         <outlet property="endDateLabel" destination="hjE-u8-YxD" id="bWW-Df-LKk"/>
@@ -157,6 +163,89 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SbA-dF-9O1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="908" y="158.77061469265368"/>
+        </scene>
+        <!--Add Trip View Controller-->
+        <scene sceneID="jmn-vd-s2y">
+            <objects>
+                <viewController title="Add Trip View Controller" id="ojf-ZZ-pMI" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Nhf-Rz-JOC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="dg1-kE-FnP">
+                                <rect key="frame" x="16" y="60" width="343" height="116"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="hlW-mt-vSx">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Destination:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfT-q6-0AG">
+                                                <rect key="frame" x="0.0" y="0.0" width="91" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="94v-eE-Z6S">
+                                                <rect key="frame" x="132" y="0.0" width="211" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="49" translatesAutoresizingMaskIntoConstraints="NO" id="7ne-MJ-Zah">
+                                        <rect key="frame" x="0.0" y="41" width="343" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x0a-M9-uid">
+                                                <rect key="frame" x="0.0" y="0.0" width="82.5" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MM/DD/YYYY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="snC-zP-b0E">
+                                                <rect key="frame" x="131.5" y="0.0" width="211.5" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="58" translatesAutoresizingMaskIntoConstraints="NO" id="fpF-pt-zgj">
+                                        <rect key="frame" x="0.0" y="82" width="343" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4x-FB-f9T">
+                                                <rect key="frame" x="0.0" y="0.0" width="74" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="MM/DD/YYYY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9A2-77-ANg">
+                                                <rect key="frame" x="132" y="0.0" width="211" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="f56-gZ-31h"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="f56-gZ-31h" firstAttribute="trailing" secondItem="dg1-kE-FnP" secondAttribute="trailing" constant="16" id="ABj-C7-dfj"/>
+                            <constraint firstItem="dg1-kE-FnP" firstAttribute="leading" secondItem="f56-gZ-31h" secondAttribute="leading" constant="16" id="Il5-Lc-PC3"/>
+                            <constraint firstItem="dg1-kE-FnP" firstAttribute="top" secondItem="f56-gZ-31h" secondAttribute="top" constant="16" id="PkL-ou-cml"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Trip" id="TK9-rF-wf7">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="gzE-bq-SBt">
+                            <connections>
+                                <segue destination="Ul8-sT-uSh" kind="unwind" identifier="SaveSegue" unwindAction="unwindToTripTableViewControllerWithSegue:" id="IgA-KV-uG2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jgP-71-5nV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Ul8-sT-uSh" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1608.8" y="158.77061469265368"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="43r-cU-Hb9">
@@ -178,6 +267,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
