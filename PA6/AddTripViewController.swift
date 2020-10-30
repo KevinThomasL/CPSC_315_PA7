@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddTripViewController: UIViewController {
+class AddTripViewController: UIViewController, UITextFieldDelegate {
 
     var tripOptional: Trip? = nil
     
@@ -25,6 +25,13 @@ class AddTripViewController: UIViewController {
             startDateTextField.text = trip.startDate
             endDateTextField.text = trip.endDate
         }
+        
+        destinationTextField.delegate = self
+        startDateTextField.delegate = self
+        endDateTextField.delegate = self
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        view.addGestureRecognizer(tap)
     }
     
     // MARK: - Navigation
@@ -41,6 +48,18 @@ class AddTripViewController: UIViewController {
             }
         }
     }
-    
 
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        destinationTextField.resignFirstResponder()
+        startDateTextField.resignFirstResponder()
+        endDateTextField.resignFirstResponder()
+        return true
+    }
+    
+    @objc func handleTap() {
+        destinationTextField.resignFirstResponder()
+        startDateTextField.resignFirstResponder()
+        endDateTextField.resignFirstResponder()
+    }
+    
 }
