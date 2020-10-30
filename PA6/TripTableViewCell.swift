@@ -14,6 +14,7 @@ class TripTableViewCell: UITableViewCell {
     // Creates labels for destination and dates
     @IBOutlet var destinationLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var tripImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +31,7 @@ class TripTableViewCell: UITableViewCell {
     func update(with trip: Trip) {
         destinationLabel.text = trip.destinationName
         dateLabel.text = "\(trip.startDate) - \(trip.endDate)"
+        tripImageView.image = UIImage(named: trip.imageName)
     }
 
 }

@@ -55,6 +55,19 @@ class TripTableViewController: UIViewController, UITableViewDataSource, UITableV
         return cell
     }
     
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let trip = trips.remove(at: sourceIndexPath.row)
+        trips.insert(trip, at: destinationIndexPath.row)
+        
+        tableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        trips.remove(at: indexPath.row)
+        
+        tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             if identifier == "DetailSegue" {
@@ -65,14 +78,19 @@ class TripTableViewController: UIViewController, UITableViewDataSource, UITableV
                     }
                 }
             }
+            else if identifier == "AddSegue" {
+                if let indexPath = tableView.indexPathForSelectedRow {
+                    tableView.deselectRow(at: indexPath, animated: true)
+                }
+            }
         }
     }
     
     @IBAction func unwindToTripTableViewController(segue: UIStoryboardSegue) {
             if let identifier = segue.identifier {
-                if identifier == "SaveUnwindSegue" {
-                    if let tripDetailVC = segue.source as? TripDetailViewController {
-                        if let trip = tripDetailVC.tripOptional {
+                if identifier == "SaveSegue" {
+                    if let addTripVC = segue.source as? AddTripViewController {
+                        if let trip = addTripVC.tripOptional {
                             // get the currently selected index path
                             if let indexPath = tableView.indexPathForSelectedRow {
                                 trips[indexPath.row] = trip
@@ -86,6 +104,11 @@ class TripTableViewController: UIViewController, UITableViewDataSource, UITableV
                 }
             }
         }
+    }
+    
+    @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
+        let newEditingMode = !tableView.isEditing
+        tableView.setEditing(newEditingMode, animated: true)
     }
     
 }

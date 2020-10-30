@@ -16,6 +16,7 @@ class TripDetailViewController: UIViewController {
     @IBOutlet var destinationLabel: UILabel!
     @IBOutlet var startDateLabel: UILabel!
     @IBOutlet var endDateLabel: UILabel!
+    @IBOutlet var tripImageView:UIImageView!
     
     // When loaded the screen will populate the labels with specific trip info
     override func viewDidLoad() {
@@ -26,6 +27,7 @@ class TripDetailViewController: UIViewController {
             destinationLabel.text = trip.destinationName
             startDateLabel.text = trip.startDate
             endDateLabel.text = trip.endDate
+            tripImageView.image = UIImage(named: trip.imageName)
         }
     }
     

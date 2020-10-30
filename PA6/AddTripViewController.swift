@@ -34,7 +34,7 @@ class AddTripViewController: UIViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         if let identifier = segue.identifier {
-            if identifier == "AddSegue" {
+            if identifier == "SaveSegue" {
                 if let destination = destinationTextField.text, let startDate = startDateTextField.text, let endDate = endDateTextField.text {
                     tripOptional = Trip(destinationName: destination, startDate: startDate, endDate: endDate, imageFileName: nil)
                 }

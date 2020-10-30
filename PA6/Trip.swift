@@ -8,12 +8,16 @@
 
 import Foundation
 
+// summertime.png author credit:
+// <div>Icons made by <a href="https://www.flaticon.com/authors/mangsaabguru" title="mangsaabguru">mangsaabguru</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+
 // Struct that represents an indivudal trip
 struct Trip: CustomStringConvertible {
     var destinationName: String
     var startDate: String
     var endDate: String
-    var imageFileName: String?
+    var imageName: String
     var description: String {
         return "description"
     }
@@ -23,7 +27,7 @@ struct Trip: CustomStringConvertible {
         self.destinationName = destinationName
         self.startDate = startDate
         self.endDate = endDate
-        self.imageFileName = imageFileName
+        self.imageName = "summertime"
     }
     
 }
