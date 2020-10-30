@@ -19,7 +19,7 @@ struct Trip: CustomStringConvertible {
     var endDate: String
     var imageName: String
     var description: String {
-        return "description"
+        return "Trip to \(destinationName) from \(startDate) to \(endDate)"
     }
     
     // Initializes variables of trip struct
