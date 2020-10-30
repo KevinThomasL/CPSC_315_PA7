@@ -40,13 +40,36 @@ class AddTripViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        var inputFlag = false
         if let identifier = segue.identifier {
             if identifier == "SaveSegue" {
-                if let destination = destinationTextField.text, let startDate = startDateTextField.text, let endDate = endDateTextField.text {
+                if let text = destinationTextField.text, text.isEmpty {
+                    destinationInputError()
+                    inputFlag = true
+                }
+                if inputFlag == false, let destination = destinationTextField.text, let startDate = startDateTextField.text, let endDate = endDateTextField.text {
                     tripOptional = Trip(destinationName: destination, startDate: startDate, endDate: endDate, imageFileName: nil)
                 }
             }
         }
+    }
+    
+    func destinationInputError() {
+        let alertController = UIAlertController(title: "Destination Input Alert", message: "Missing Destination", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func startDateInputError() {
+        let alertController = UIAlertController(title: "Start Date Input Alert", message: "Invalid Start Date Entered", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func endDateInputError() {
+        let alertController = UIAlertController(title: "End Date Input Alert", message: "Invalid End Date Entered", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

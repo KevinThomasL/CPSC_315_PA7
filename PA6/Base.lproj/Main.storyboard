@@ -191,7 +191,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="dg1-kE-FnP">
-                                <rect key="frame" x="16" y="60" width="343" height="116"/>
+                                <rect key="frame" x="16" y="60" width="343" height="157"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="hlW-mt-vSx">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="34"/>
@@ -241,6 +241,13 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJ3-u5-P6u">
+                                        <rect key="frame" x="0.0" y="123" width="343" height="34"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <segue destination="Ul8-sT-uSh" kind="unwind" unwindAction="unwindToTripTableViewControllerWithSegue:" id="4SC-eQ-rv9"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
