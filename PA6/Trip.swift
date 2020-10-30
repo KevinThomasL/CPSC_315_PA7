@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Struct that represents an indivudal trip
 struct Trip: CustomStringConvertible {
     var destinationName: String
     var startDate: String
@@ -17,6 +18,7 @@ struct Trip: CustomStringConvertible {
         return "description"
     }
     
+    // Initializes variables of trip struct
     init(destinationName: String, startDate: String, endDate: String, imageFileName: String?) {
         self.destinationName = destinationName
         self.startDate = startDate

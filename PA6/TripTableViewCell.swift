@@ -8,8 +8,10 @@
 
 import UIKit
 
+// Class that dictates what is shown within an individual trip cell
 class TripTableViewCell: UITableViewCell {
 
+    // Creates labels for destination and dates
     @IBOutlet var destinationLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
     
@@ -24,6 +26,7 @@ class TripTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    // Dispays the trip title and dates within the cell
     func update(with trip: Trip) {
         destinationLabel.text = trip.destinationName
         dateLabel.text = "\(trip.startDate) - \(trip.endDate)"

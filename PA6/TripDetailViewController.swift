@@ -2,20 +2,22 @@
 //  TripDetailViewController.swift
 //  PA6
 //
-//  Created by user180005 on 10/29/20.
+//  Created by Kevin Lunden on 10/29/20.
 //  Copyright © 2020 Kevin Lunden. All rights reserved.
 //
 
 import UIKit
 
+// class that controls the trips details page
 class TripDetailViewController: UIViewController {
 
+    // Creates outlets for displaying trip details and creates a trip optional
     var tripOptional: Trip? = nil
-    
     @IBOutlet var destinationLabel: UILabel!
     @IBOutlet var startDateLabel: UILabel!
     @IBOutlet var endDateLabel: UILabel!
     
+    // When loaded the screen will populate the labels with specific trip info
     override func viewDidLoad() {
         super.viewDidLoad()
 

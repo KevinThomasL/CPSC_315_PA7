@@ -8,20 +8,25 @@
 
 import UIKit
 
+// Class that controls the trip table, first screen
 class TripTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    // Creates an empty trip array
     var trips = [Trip]()
 
+    // Creates a tableview outlet
     @IBOutlet var tableView: UITableView!
     
     let dateFormatter = DateFormatter()
     
+    // Upon loading will add trips to trips array
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initializeTrips()
     }
     
+    // Function that adds first predetermined trips to array
     func initializeTrips() {
         dateFormatter.dateFormat = "MM/dd/yyyy"
         let today = Date()
