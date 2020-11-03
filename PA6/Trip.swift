@@ -11,6 +11,9 @@ import Foundation
 // summertime.png author credit:
 // <div>Icons made by <a href="https://www.flaticon.com/authors/mangsaabguru" title="mangsaabguru">mangsaabguru</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
+// suitcases.png author credit:
+// Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+
 
 // Struct that represents an indivudal trip
 struct Trip: CustomStringConvertible {
@@ -23,11 +26,11 @@ struct Trip: CustomStringConvertible {
     }
     
     // Initializes variables of trip struct
-    init(destinationName: String, startDate: String, endDate: String, imageFileName: String?) {
+    init(destinationName: String, startDate: String, endDate: String, imageName: String?) {
         self.destinationName = destinationName
         self.startDate = startDate
         self.endDate = endDate
-        self.imageName = "summertime"
+        self.imageName = imageName!
     }
     
 }

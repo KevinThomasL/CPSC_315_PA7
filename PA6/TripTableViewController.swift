@@ -32,11 +32,14 @@ class TripTableViewController: UIViewController, UITableViewDataSource, UITableV
         let today = Date()
         let todayStr = dateFormatter.string(from: today)
         
-        trips.append(Trip(destinationName: "Hawaii", startDate: "07/23/2020", endDate: "07/29/2020", imageFileName: nil))
-        trips.append(Trip(destinationName: "Paris", startDate: "07/24/2020", endDate: "08/03/2020", imageFileName: nil))
-        trips.append(Trip(destinationName: "London", startDate: "08/04/2020", endDate: "08/10/2020", imageFileName: nil))
+        trips.append(Trip(destinationName: "Hawaii", startDate: "07/23/2020", endDate: "07/29/2020", imageName: "summertime"))
+        trips.append(Trip(destinationName: "Paris", startDate: "07/24/2020", endDate: "08/03/2020", imageName: "summertime"))
+        trips.append(Trip(destinationName: "London", startDate: "08/04/2020", endDate: "08/10/2020", imageName: "summertime"))
+        trips.append(Trip(destinationName: "Berlin", startDate: "09/21/2020", endDate: "09/28/2020", imageName: "suitcases"))
+        trips.append(Trip(destinationName: "Dubai", startDate: "11/22/2020", endDate: "11/29/2020", imageName: "suitcases"))
     }
     
+    // Function that returns amount of rows in section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return trips.count
@@ -44,6 +47,7 @@ class TripTableViewController: UIViewController, UITableViewDataSource, UITableV
         return 0
     }
     
+    // Function that determins what cell to display
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
         let trip = trips[row]

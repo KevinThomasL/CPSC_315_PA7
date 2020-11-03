@@ -43,30 +43,32 @@ class AddTripViewController: UIViewController, UITextFieldDelegate {
         var inputFlag = false
         if let identifier = segue.identifier {
             if identifier == "SaveSegue" {
-                if let text = destinationTextField.text, text.isEmpty {
-                    destinationInputError()
-                    inputFlag = true
-                }
+                inputFlag = destinationInputCheck()
                 if inputFlag == false, let destination = destinationTextField.text, let startDate = startDateTextField.text, let endDate = endDateTextField.text {
-                    tripOptional = Trip(destinationName: destination, startDate: startDate, endDate: endDate, imageFileName: nil)
+                    tripOptional = Trip(destinationName: destination, startDate: startDate, endDate: endDate, imageName: nil)
                 }
             }
         }
     }
     
-    func destinationInputError() {
-        let alertController = UIAlertController(title: "Destination Input Alert", message: "Missing Destination", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-        present(alertController, animated: true, completion: nil)
+    func destinationInputCheck() -> Bool {
+        if let text = destinationTextField.text, text.isEmpty {
+            let alertController = UIAlertController(title: "Destination Input Alert", message: "Missing Destination", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+            present(alertController, animated: true, completion: nil)
+            
+            return true
+        }
+        return false
     }
     
-    func startDateInputError() {
+    func startDateInputCheck() {
         let alertController = UIAlertController(title: "Start Date Input Alert", message: "Invalid Start Date Entered", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
     }
     
-    func endDateInputError() {
+    func endDateInputCheck() {
         let alertController = UIAlertController(title: "End Date Input Alert", message: "Invalid End Date Entered", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
