@@ -5,7 +5,6 @@
 //  Created by user180005 on 10/27/20.
 //  Copyright © 2020 Kevin Lunden. All rights reserved.
 //
-
 import UIKit
 
 // Class that controls the trip table, first screen
@@ -116,4 +115,3 @@ class TripTableViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
 }
-
