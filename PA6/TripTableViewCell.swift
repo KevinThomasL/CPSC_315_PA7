@@ -29,9 +29,17 @@ class TripTableViewCell: UITableViewCell {
     
     // Dispays the trip title and dates within the cell
     func update(with trip: Trip) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        
+        if let startDate = trip.startDate, let endDate = trip.endDate {
+            let startDateString = dateFormatter.string(from: startDate)
+            let endDateString = dateFormatter.string(from: endDate)
+            dateLabel.text = "\(startDateString) - \(endDateString)"
+        }
+        
         destinationLabel.text = trip.destinationName
-        dateLabel.text = "\(trip.startDate) - \(trip.endDate)"
-        tripImageView.image = UIImage(named: trip.imageName)
+        tripImageView.image = UIImage(named: trip.imageName!)
     }
 
 }

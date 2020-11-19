@@ -6,38 +6,32 @@
 //  Copyright © 2020 Kevin Lunden. All rights reserved.
 //
 import UIKit
+import CoreData
 
 // Class that controls the trip table, first screen
 class TripTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     // Creates an empty trip array
     var trips = [Trip]()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
+    
     // Creates a tableview outlet
     @IBOutlet var tableView: UITableView!
-    
+
     let dateFormatter = DateFormatter()
     
     // Upon loading will add trips to trips array
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        initializeTrips()
+                        
+        // print out the documents directory so we can see our database in Finder
+        let documentsDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        print(documentsDirectoryURL)
+            
+        loadTrips()
     }
-    
-    // Function that adds first predetermined trips to array
-    func initializeTrips() {
-        dateFormatter.dateFormat = "MM/dd/yyyy"
-        let today = Date()
-        let todayStr = dateFormatter.string(from: today)
         
-        trips.append(Trip(destinationName: "Hawaii", startDate: "07/23/2020", endDate: "07/29/2020", imageName: "summertime"))
-        trips.append(Trip(destinationName: "Paris", startDate: "07/24/2020", endDate: "08/03/2020", imageName: "summertime"))
-        trips.append(Trip(destinationName: "London", startDate: "08/04/2020", endDate: "08/10/2020", imageName: "summertime"))
-        trips.append(Trip(destinationName: "Berlin", startDate: "09/21/2020", endDate: "09/28/2020", imageName: "suitcases"))
-        trips.append(Trip(destinationName: "Dubai", startDate: "11/22/2020", endDate: "11/29/2020", imageName: "suitcases"))
-    }
-    
     // Function that returns amount of rows in section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
@@ -45,32 +39,35 @@ class TripTableViewController: UIViewController, UITableViewDataSource, UITableV
         }
         return 0
     }
-    
+        
     // Function that determins what cell to display
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = indexPath.row
-        let trip = trips[row]
-        
+            
         let cell = tableView.dequeueReusableCell(withIdentifier: "TripCell", for: indexPath) as! TripTableViewCell
-        
+        let trip = trips[indexPath.row]
+        //cell.textLabel?.text = trip.destinationName
         cell.update(with: trip)
-        
         return cell
     }
-    
+        
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let trip = trips.remove(at: sourceIndexPath.row)
         trips.insert(trip, at: destinationIndexPath.row)
-        
+            
         tableView.reloadData()
     }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        trips.remove(at: indexPath.row)
         
-        tableView.deleteRows(at: [indexPath], with: .fade)
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            context.delete(trips[indexPath.row])
+            trips.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        
+        saveTrips()
     }
-    
+        
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             if identifier == "DetailSegue" {
@@ -88,30 +85,57 @@ class TripTableViewController: UIViewController, UITableViewDataSource, UITableV
             }
         }
     }
-    
+        
     @IBAction func unwindToTripTableViewController(segue: UIStoryboardSegue) {
             if let identifier = segue.identifier {
                 if identifier == "SaveSegue" {
-                    if let addTripVC = segue.source as? AddTripViewController {
-                        if let trip = addTripVC.tripOptional {
-                            // get the currently selected index path
-                            if let indexPath = tableView.indexPathForSelectedRow {
-                                trips[indexPath.row] = trip
-                            }
-                            else {
-                                trips.append(trip)
-                            }
-                            // force update the table view
-                            tableView.reloadData()
-                    }
+                    if let tripDetailVC = segue.source as? AddTripViewController {
+                        if let destination = tripDetailVC.destinationName, let start = tripDetailVC.startDate, let end = tripDetailVC.endDate, let image = tripDetailVC.imageName  {
+                            let trip = Trip(context: self.context)
+                            
+                            trip.destinationName = destination
+                            trip.startDate = start
+                            trip.endDate = end
+                            trip.imageName = image
+                            
+                            trips.append(trip)
+                        }
+                        saveTrips()
                 }
             }
         }
     }
-    
+        
     @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
         let newEditingMode = !tableView.isEditing
         tableView.setEditing(newEditingMode, animated: true)
     }
+        
+    func saveTrips() {
+        do {
+            try context.save()
+        }
+        catch {
+            print("Error saving trips")
+        }
+        tableView.reloadData()
+    }
+        
+    // READ of CRUD
+    func loadTrips() {
+        // we need to make a "request" to get the Category objects
+        // via the persistent container
+        let request: NSFetchRequest<Trip> = Trip.fetchRequest()
+        // with a sql SELECT statement we usually specify a WHERE clause if we want to filter rows from the table we are selecting from
+        // if we want to filter, we need to add a "predicate" to our request... we will do this later for Items
+        do {
+            trips = try context.fetch(request)
+        }
+        catch {
+            print("Error loading categories \(error)")
+        }
+        tableView.reloadData()
+    }
+
     
 }

@@ -24,10 +24,21 @@ class TripDetailViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         if let trip = tripOptional {
-            destinationLabel.text = trip.destinationName
-            startDateLabel.text = trip.startDate
-            endDateLabel.text = trip.endDate
-            tripImageView.image = UIImage(named: trip.imageName)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MM/dd/yyyy"
+            
+            if let destination = trip.destinationName {
+                destinationLabel.text = "\(destination)"
+            }
+            if let startDate = trip.startDate as Date? {
+                startDateLabel.text = "\(dateFormatter.string(from: startDate))"
+            }
+            if let endDate = trip.endDate as Date? {
+                endDateLabel.text = "\(dateFormatter.string(from: endDate))"
+            }
+            if let imageName = trip.imageName {
+                tripImageView.image = UIImage(named: imageName)
+            }
         }
     }
     

@@ -7,27 +7,23 @@
 //
 import UIKit
 
-class AddTripViewController: UIViewController, UITextFieldDelegate {
+class AddTripViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate
+ {
 
     var tripOptional: Trip? = nil
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    var destinationName: String?
+    var startDate: Date?
+    var endDate: Date?
+    var imageName: String?
     @IBOutlet var destinationTextField: UITextField!
     @IBOutlet var startDateTextField: UITextField!
     @IBOutlet var endDateTextField: UITextField!
+    @IBOutlet var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        if let trip = tripOptional {
-            destinationTextField.text = trip.destinationName
-            startDateTextField.text = trip.startDate
-            endDateTextField.text = trip.endDate
-        }
-        
-        destinationTextField.delegate = self
-        startDateTextField.delegate = self
-        endDateTextField.delegate = self
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         view.addGestureRecognizer(tap)
@@ -38,14 +34,69 @@ class AddTripViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
-        var inputFlag = false
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        
         if let identifier = segue.identifier {
             if identifier == "SaveSegue" {
-                inputFlag = destinationInputCheck()
-                if inputFlag == false, let destination = destinationTextField.text, let startDate = startDateTextField.text, let endDate = endDateTextField.text {
-                    tripOptional = Trip(destinationName: destination, startDate: startDate, endDate: endDate, imageName: nil)
+                if let destination = destinationTextField.text, let start = dateFormatter.date(from: startDateTextField.text!), let end = dateFormatter.date(from: endDateTextField.text!) {
+                    
+                    destinationName = destination
+                    startDate = start
+                    endDate = end
+                    imageName = "suitcases"
                 }
             }
+        }
+    }
+    
+    @IBAction func addImagePressed(_ sender: UIButton) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
+        let alertController = UIAlertController(title: "Choose Image Source", message: nil, preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(cancelAction)
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: {
+                action in imagePicker.sourceType = .camera
+                self.present(imagePicker, animated: true, completion: nil)
+            })
+            alertController.addAction(cameraAction)
+        }
+        
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default, handler: { action in imagePicker.sourceType = .photoLibrary
+                self.present(imagePicker, animated: true,
+                completion: nil)
+            })
+            alertController.addAction(photoLibraryAction)
+        }
+    
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
+            imageView.image = selectedImage
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func writeImage(imageOptional: UIImage?) {
+        if let image = imageOptional {
+            let imageName = UUID().uuidString
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let imagePath = paths[0].appendingPathComponent(imageName)
+            
+            if let jpegData = image.jpegData(compressionQuality: 0.8) {
+                try? jpegData.write(to: imagePath)
+            }
+            
+            self.imageName = imagePath.path
         }
     }
     
