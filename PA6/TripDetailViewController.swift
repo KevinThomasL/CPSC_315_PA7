@@ -1,6 +1,6 @@
 //
 //  TripDetailViewController.swift
-//  PA6
+//  PA7
 //
 //  Created by Kevin Lunden on 10/29/20.
 //  Copyright © 2020 Kevin Lunden. All rights reserved.

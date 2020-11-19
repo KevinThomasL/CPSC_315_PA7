@@ -1,8 +1,8 @@
 //
 //  AddTripViewController.swift
-//  PA6
+//  PA7
 //
-//  Created by user180005 on 10/30/20.
+//  Created by Kevin Lunden on 10/30/20.
 //  Copyright © 2020 Kevin Lunden. All rights reserved.
 //
 import UIKit
@@ -18,6 +18,7 @@ class AddTripViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     var endDate: Date?
     var imageFileName: String?
     var imageFilePath: String?
+    
     @IBOutlet var destinationTextField: UITextField!
     @IBOutlet var startDateTextField: UITextField!
     @IBOutlet var endDateTextField: UITextField!

@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  PA6
+//  PA7
 //
-//  Created by user180005 on 10/27/20.
+//  Created by Kevin Lunden on 10/27/20.
 //  Copyright © 2020 Kevin Lunden. All rights reserved.
 //
 
