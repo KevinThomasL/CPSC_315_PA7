@@ -39,7 +39,7 @@ class TripTableViewCell: UITableViewCell {
         }
         
         destinationLabel.text = trip.destinationName
-        tripImageView.image = UIImage(named: trip.imageName!)
+        tripImageView.image = UIImage(contentsOfFile: trip.imageName!)
     }
 
 }

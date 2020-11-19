@@ -37,7 +37,7 @@ class TripDetailViewController: UIViewController {
                 endDateLabel.text = "\(dateFormatter.string(from: endDate))"
             }
             if let imageName = trip.imageName {
-                tripImageView.image = UIImage(named: imageName)
+                tripImageView.image = UIImage(contentsOfFile: imageName)
             }
         }
     }

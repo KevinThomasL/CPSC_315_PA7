@@ -17,6 +17,7 @@ class AddTripViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     var startDate: Date?
     var endDate: Date?
     var imageName: String?
+    var imageFileName: String?
     @IBOutlet var destinationTextField: UITextField!
     @IBOutlet var startDateTextField: UITextField!
     @IBOutlet var endDateTextField: UITextField!
@@ -44,7 +45,13 @@ class AddTripViewController: UIViewController, UITextFieldDelegate, UIImagePicke
                     destinationName = destination
                     startDate = start
                     endDate = end
-                    imageName = "suitcases"
+                    //imageName = "suitcases"
+                    if let imagePath = imageName {
+                        imageFileName = imagePath
+                    }
+                    else {
+                        imageFileName = "suitcases"
+                    }
                 }
             }
         }

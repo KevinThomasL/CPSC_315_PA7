@@ -90,7 +90,7 @@ class TripTableViewController: UIViewController, UITableViewDataSource, UITableV
             if let identifier = segue.identifier {
                 if identifier == "SaveSegue" {
                     if let tripDetailVC = segue.source as? AddTripViewController {
-                        if let destination = tripDetailVC.destinationName, let start = tripDetailVC.startDate, let end = tripDetailVC.endDate, let image = tripDetailVC.imageName  {
+                        if let destination = tripDetailVC.destinationName, let start = tripDetailVC.startDate, let end = tripDetailVC.endDate, let image = tripDetailVC.imageFileName  {
                             let trip = Trip(context: self.context)
                             
                             trip.destinationName = destination
