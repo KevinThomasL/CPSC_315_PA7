@@ -43,9 +43,10 @@ class TripTableViewController: UIViewController, UITableViewDataSource, UITableV
     // Function that determins what cell to display
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TripCell", for: indexPath) as! TripTableViewCell
         let trip = trips[indexPath.row]
-        //cell.textLabel?.text = trip.destinationName
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TripCell", for: indexPath) as! TripTableViewCell
+        
         cell.update(with: trip)
         return cell
     }
@@ -90,15 +91,15 @@ class TripTableViewController: UIViewController, UITableViewDataSource, UITableV
             if let identifier = segue.identifier {
                 if identifier == "SaveSegue" {
                     if let tripDetailVC = segue.source as? AddTripViewController {
-                        if let destination = tripDetailVC.destinationName, let start = tripDetailVC.startDate, let end = tripDetailVC.endDate, let image = tripDetailVC.imageName  {
-                            let trip = Trip(context: self.context)
+                        if let destination = tripDetailVC.destinationName, let start = tripDetailVC.startDate, let end = tripDetailVC.endDate, let image = tripDetailVC.imageFileName  {
+                            let newTrip = Trip(context: self.context)
                             
-                            trip.destinationName = destination
-                            trip.startDate = start
-                            trip.endDate = end
-                            trip.imageName = image
+                            newTrip.destinationName = destination
+                            newTrip.startDate = start
+                            newTrip.endDate = end
+                            newTrip.imageFileName = image
                             
-                            trips.append(trip)
+                            trips.append(newTrip)
                         }
                         saveTrips()
                 }

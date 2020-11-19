@@ -20,7 +20,7 @@ extension Trip {
     @NSManaged public var destinationName: String?
     @NSManaged public var endDate: Date?
     @NSManaged public var startDate: Date?
-    @NSManaged public var imageName: String?
+    @NSManaged public var imageFileName: String?
 
 }
 

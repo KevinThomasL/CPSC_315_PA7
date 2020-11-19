@@ -5,7 +5,6 @@
 //  Created by Kevin Lunden on 10/29/20.
 //  Copyright © 2020 Kevin Lunden. All rights reserved.
 //
-
 import UIKit
 
 // class that controls the trips details page
@@ -16,7 +15,7 @@ class TripDetailViewController: UIViewController {
     @IBOutlet var destinationLabel: UILabel!
     @IBOutlet var startDateLabel: UILabel!
     @IBOutlet var endDateLabel: UILabel!
-    @IBOutlet var tripImageView:UIImageView!
+    @IBOutlet var tripImageView: UIImageView!
     
     // When loaded the screen will populate the labels with specific trip info
     override func viewDidLoad() {
@@ -36,8 +35,8 @@ class TripDetailViewController: UIViewController {
             if let endDate = trip.endDate as Date? {
                 endDateLabel.text = "\(dateFormatter.string(from: endDate))"
             }
-            if let imageName = trip.imageName {
-                tripImageView.image = UIImage(named: imageName)
+            if let image = trip.imageFileName {
+                tripImageView.image = UIImage(contentsOfFile: image)
             }
         }
     }

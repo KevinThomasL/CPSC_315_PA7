@@ -16,7 +16,8 @@ class AddTripViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     var destinationName: String?
     var startDate: Date?
     var endDate: Date?
-    var imageName: String?
+    var imageFileName: String?
+    var imageFilePath: String?
     @IBOutlet var destinationTextField: UITextField!
     @IBOutlet var startDateTextField: UITextField!
     @IBOutlet var endDateTextField: UITextField!
@@ -44,9 +45,12 @@ class AddTripViewController: UIViewController, UITextFieldDelegate, UIImagePicke
                     destinationName = destination
                     startDate = start
                     endDate = end
-                    //imageName = "suitcases"
-                    if let imagePath = imageName {
-                        
+
+                    if let imagePath = imageFilePath {
+                        imageFileName = imagePath
+                    }
+                    else {
+                        imageFileName = nil
                     }
                 }
             }
@@ -82,12 +86,16 @@ class AddTripViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         present(alertController, animated: true, completion: nil)
     }
     
-    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
-            imageView.image = selectedImage
-            dismiss(animated: true, completion: nil)
-        }
+    // Controller for image picker option
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+           
+        guard let selectedImage = info[.originalImage] as? UIImage
+        else { return }
+       
+        writeImage(imageOptional: selectedImage)
+        dismiss(animated: true, completion: nil)
     }
+
     
     func writeImage(imageOptional: UIImage?) {
         if let image = imageOptional {
@@ -99,7 +107,7 @@ class AddTripViewController: UIViewController, UITextFieldDelegate, UIImagePicke
                 try? jpegData.write(to: imagePath)
             }
             
-            self.imageName = imagePath.path
+            self.imageFilePath = imagePath.path
         }
     }
     

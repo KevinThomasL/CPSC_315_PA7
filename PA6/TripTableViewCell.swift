@@ -5,7 +5,6 @@
 //  Created by Kevin Lunden on 10/29/20.
 //  Copyright © 2020 Kevin Lunden. All rights reserved.
 //
-
 import UIKit
 
 // Class that dictates what is shown within an individual trip cell
@@ -39,7 +38,10 @@ class TripTableViewCell: UITableViewCell {
         }
         
         destinationLabel.text = trip.destinationName
-        tripImageView.image = UIImage(named: trip.imageName!)
+        
+        if let image = trip.imageFileName {
+            tripImageView.image = UIImage(contentsOfFile: image)
+        }
     }
 
 }
